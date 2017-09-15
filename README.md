@@ -161,8 +161,9 @@ spec:
         value: "passw0rd"
 ```
 
-image:tensorflow/tensorflow:latestのところで、DockerHubに公開されているTensorFlowのイメージを指定しています。
-TensorFlowのコンテナを起動してブラウザでアクセスすると、まずログイン画面が表示されます。トークンかパスワードの入力が求められるのですが、ここで自分で決めたパスワードを使えるようにしておきます。
+
+"image:tensorflow/tensorflow:latest"のところで、DockerHubに公開されているTensorFlowのイメージを呼び出す指定をしています。<br>
+TensorFlowが起動してブラウザでアクセスする際にはまずログイン画面が表示されるのですが、そこで自分で決めたパスワードを使えるようにしておきます。
 env:以下の3行で"passw0rd"というパスワードを指定しています。安全のために推測しにくいパスワードを指定しておいて下さい。
 
 定義はテキストファイルに保存します。ここではmy-tensor-pod.ymlというファイルに保存したとして手順を続けます。
