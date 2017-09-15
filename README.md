@@ -140,6 +140,38 @@ Kubernetesクラスターの作成がまだ実行中のタイミングでkubectl
 
 
 ## 3. TensorFlow用Pod定義ファイルを作成する
+
+kubernetesクラスタにデプロイするコンテナは、podという単位で管理されます。コンテナをpodで包んでデプロイするような感覚です。
+podはYAMLという書式で定義を記述し、kubectlコマンドにこの定義を読ませてデプロイします。
+以下にpod定義の例を示します。
+
+```yaml:my-tensor-pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-tensor-pod
+  labels:
+    app: my-tensor
+spec:
+  containers:
+    - name: tensorflow
+      image: tensorflow/tensorflow:latest
+      env:
+      - name: PASSWORD
+        value: "passw0rd"
+```
+
+image:tensorflow/tensorflow:latestのところで、DockerHubに公開されているTensorFlowのイメージを指定しています。
+このイメージのjupyter notebookは、ログインする際にトークンかパスワードの入力を要求されます。ここでは自分で決めたパスワードを使うことにします。
+env:以下の3行で"passw0rd"というパスワードを指定しています。安全のために推測しにくいパスワードを指定しておいて下さい。
+
+定義はテキストファイルに保存します。ここではmy-tensor-pod.ymlというファイルに保存したとして手順を続けます。
+
+
+
+
+
+
 ## 4. TensorFlowイメージをデプロイする
 
 
