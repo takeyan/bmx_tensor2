@@ -171,5 +171,44 @@ TensorFlowが起動してブラウザでアクセスする際にはまずログ�
 
 ## 4. TensorFlowイメージをデプロイする
 
+先に作成したmy-tensor-pod.ymlを使ってpodをデプロイし、それをサービスとして公開することによりIPアドレス／ポート番号を割り当てます。
+以下の手順を実行します。
+
+```bash:podのデプロイ
+kubectl create -f my-tensor-pod.yml
+```
+
+pod "my-tensor-pod" createdという応答が返れば成功です。
+
+
+```bash:podの確認
+kubectl get pods
+```
+
+my-tensor-svcという名前でサービスを公開します。以下のコマンドを実行します。
+
+```bash:サービスの公開
+kubectl expose pods my-tensor-pod --type=NodePort --port=8888 --name=my-tensor-svc
+```
+
+公開されたサービスを確認します。サービスに割り当てられたポート番号が表示されるのでメモしておいて下さい。
+
+```bash:サービスの確認
+kubectl get services
+```
+
+ノード一覧を表示して、外部向けIPアドレスを確認します。
+
+```bash:ノード一覧
+kubectl get nodes
+```
+
+これでTensorFlowを使用する準備ができました。先に確認したIPアドレス、ポート番号をWebブラウザに入力して、TensorFlow（厳密にはjupyter notebookサーバ）にログインします。ログイン画面が表示されたら、あらかじめpod定義に指定しておいたパスワードを入力して下さい。
+
+jupyter notebook一覧の画面が表示されたら成功です。
+
+
+以上です。
+
 
 
